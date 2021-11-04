@@ -10,6 +10,7 @@ exports.register = functions.https.onCall(async (data, context) => {
     // response.send("Hello from Firebase!");
     const users = db.collection('users')
     try {
+        console.log(data.email);
         const user = await auth.createUser({
             email: data.email,
             password: data.password,
@@ -20,6 +21,9 @@ exports.register = functions.https.onCall(async (data, context) => {
                 email: data.email,
                 username: data.username,
                 address: data.address,
+                isAdmin: data.isAdmin ? true : false,
+                isStaff: data.isStaff ? true : false,
+                isCustomer: data.isCustomer ? true : false,
                 created: new Date(),
                 active: false
             })
